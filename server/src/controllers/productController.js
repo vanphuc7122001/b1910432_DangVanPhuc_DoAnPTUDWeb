@@ -38,41 +38,52 @@ class productController {
   }
 
   async create(req, res, next) {
-    const { path } = req.file;
-    const imgUrl = path.slice(4, path.length);
-    const image = `http://localhost:9000/${imgUrl}`;
+    // const { path } = req.file;
+    // const imgUrl = path.slice(4, path.length);
+    // const image = `http://localhost:9000/${imgUrl}`;
+    // try {
+    //   const product = new Product(req.body);
+    //   const response = await product.save();
+    //   if (response) {
+    //     return res.status(201).send({
+    //       data: response,
+    //       success: 1,
+    //     });
+    //   } else {
+    //     return res.status(400).send({
+    //       data: response,
+    //       success: 0,
+    //     });
+    //   }
+    // } catch (error) {
+    //   return next(new ApiError(500, "Internal Server Error!!"));
+    // }
+
     try {
-      const payload = {
-        ...req.body,
-        image,
-      };
-      const product = new Product(payload);
+      const product = new Product(req.body);
       const response = await product.save();
       if (response) {
-        return res.status(201).send({
+        res.status(201).json({
           data: response,
-          success: 1,
+          success: true,
         });
       } else {
-        return res.status(400).send({
-          data: response,
-          success: 0,
-        });
+        return next(new ApiError(500, "Internal Server Error!!"));
       }
     } catch (error) {
-      return next(new ApiError(500, "Internal Server Error!!"));
+      return next(new ApiError(500, error.message));
     }
   }
 
   async update(req, res, next) {
     const { id } = req.params;
-    const { path } = req.file;
-    const imgUrl = path.slice(4, path.length);
-    const image = `http://localhost:9000/${imgUrl}`;
+    // const { path } = req.file;
+    // const imgUrl = path.slice(4, path.length);
+    // const image = `http://localhost:9000/${imgUrl}`;
     try {
       const payload = {
         ...req.body,
-        image,
+        // image,
       };
       const response = await Product.findByIdAndUpdate(
         {

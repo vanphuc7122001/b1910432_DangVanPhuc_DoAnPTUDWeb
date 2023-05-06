@@ -4,7 +4,6 @@ const mongoose = require("mongoose"); // Erase if already required
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -17,11 +16,9 @@ const userSchema = new mongoose.Schema({
   },
   phone_number: {
     type: String,
-    required: true,
   },
   address: {
     type: String,
-    required: true,
   },
   token: {
     type: String,

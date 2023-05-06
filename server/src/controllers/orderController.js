@@ -40,25 +40,18 @@ class orderController {
   }
 
   async create(req, res, next) {
-    const {
-      owner,
-      name_reciever,
-      phone_reciever,
-      address_reciever,
-      products,
-      totalPrice,
-    } = req.body;
-
     try {
       const order = new Order(req.body);
       const response = await order.save();
       if (response) {
         res.status(201).json({
-          success: 1,
+          success: true,
           data: response,
         });
       } else {
-        return next(new ApiError(400, "Created failed!!"));
+        return res.status(201).json({
+          success: false,
+        });
       }
     } catch (error) {
       return next(new ApiError(500, error.message));

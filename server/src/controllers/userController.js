@@ -21,7 +21,7 @@ class userController {
           user.token = token;
           user.save();
           ls.set("token", token);
-          res.status(200).send({ success: 1, token });
+          res.status(200).send({ success: 1, token, id: user._id });
         } else {
           return next(new ApiError(400, "wrong account or password"));
         }
@@ -34,7 +34,7 @@ class userController {
   }
 
   async register(req, res, next) {
-    const { name, email, password, phone_number, address } = req.body;
+    const { email, password } = req.body;
     try {
       // tạo ra 1 chuổi ngẩu nhiên
       const salt = bcrypt.genSaltSync(10);
@@ -42,11 +42,8 @@ class userController {
       var hashPassword = bcrypt.hashSync(password, salt);
 
       const newUser = await User.create({
-        name,
         email,
         password: hashPassword,
-        phone_number,
-        address,
       });
       if (newUser) {
         return res.status(201).send({

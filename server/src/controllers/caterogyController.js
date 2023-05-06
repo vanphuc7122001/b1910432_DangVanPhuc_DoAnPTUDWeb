@@ -28,6 +28,7 @@ class caterogyController {
     if (response) {
       res.status(201).json({
         data: response,
+        success: true,
       });
     } else {
       return next(new ApiError(500, "Internal Server Error!!"));
@@ -40,7 +41,9 @@ class caterogyController {
     try {
       const updated = await Caterogy.findOneAndUpdate({ _id: id }, req.body);
       if (updated) {
-        res.status(200).send(updated);
+        res.status(200).send({
+          success: true,
+        });
       } else {
         return next(new ApiError(404, "Not Found!!"));
       }

@@ -27,7 +27,11 @@ class adminController {
             secure: process.env.NODE_ENV === "production",
           })
           .status(200)
-          .json({ message: "Logged in successfully 😊 👌", token });
+          .json({
+            message: "Logged in successfully 😊 👌",
+            token,
+            id: user.id,
+          });
       }
     } catch (error) {
       new ApiError(500, "Internal Server Error!!");

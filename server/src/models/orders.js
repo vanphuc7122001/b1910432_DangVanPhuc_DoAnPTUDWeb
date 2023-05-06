@@ -8,20 +8,16 @@ var userSchema = new mongoose.Schema({
   },
   name_reciever: {
     type: String,
-    required: true,
     index: true,
   },
   phone_reciever: {
     type: String,
-    required: true,
   },
   address_reciever: {
     type: String,
-    required: true,
   },
   status: {
     type: Number,
-    required: true,
     default: "0",
   },
   products: [
@@ -32,7 +28,6 @@ var userSchema = new mongoose.Schema({
   ],
   totalPrice: {
     type: Number,
-    required: true,
   },
 });
 
